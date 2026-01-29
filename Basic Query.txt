@@ -1,0 +1,147 @@
+Exercise 1: 
+/* =========================================
+   Create Employees table
+   ========================================= */
+CREATE TABLE Employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary INT
+);
+
+/* =========================================
+   Insert data into Employees table
+   ========================================= */
+INSERT INTO Employees (employee_id, name, department, salary) VALUES
+(1, 'Alice', 'HR', 50000),
+(2, 'Bob', 'IT', 70000),
+(3, 'Charlie', 'Finance', 60000),
+(4, 'David', 'IT', 80000),
+(5, 'Eva', 'HR', 55000);
+
+/* =========================================
+   Task 1: Retrieve all employees
+   who work in the IT department
+   ========================================= */
+SELECT *
+FROM Employees
+WHERE department = 'IT';
+
+/* =========================================
+   Task 2: Find employees
+   with salary greater than 60000
+   ========================================= */
+SELECT *
+FROM Employees
+WHERE salary > 60000;
+
+/* =========================================
+   Task 3: List all employees
+   sorted by salary in descending order
+   ========================================= */
+SELECT *
+FROM Employees
+ORDER BY salary DESC;
+
+/* =========================================
+   Task 4: Find the average salary
+   for each department
+   ========================================= */
+SELECT department,
+       AVG(salary) AS average_salary
+FROM Employees
+GROUP BY department;
+
+/* =========================================
+   Task 5: Increase the salary of
+   employee with employee_id = 3 by 10%
+   ========================================= */
+UPDATE Employees
+SET salary = salary + (salary * 0.10)
+WHERE employee_id = 3;
+
+/* =========================================
+   Task 6: Delete the employee
+   with employee_id = 2
+   ========================================= */
+DELETE FROM Employees
+WHERE employee_id = 2;
+
+Exercise 2:
+/* =========================================
+   Create Employees table
+   ========================================= */
+CREATE TABLE Employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department_id INT,
+    salary INT
+);
+
+/* =========================================
+   Create Departments table
+   ========================================= */
+CREATE TABLE Departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50)
+);
+
+/* =========================================
+   Insert data into Departments table
+   ========================================= */
+INSERT INTO Departments (department_id, department_name) VALUES
+(1, 'HR'),
+(2, 'IT'),
+(3, 'Finance');
+
+/* =========================================
+   Insert data into Employees table
+   ========================================= */
+INSERT INTO Employees (employee_id, name, department_id, salary) VALUES
+(1, 'Alice', 1, 50000),
+(2, 'Bob', 2, 70000),
+(3, 'Charlie', 3, 60000),
+(4, 'David', 2, 80000),
+(5, 'Eva', 1, 55000);
+
+/* =========================================
+   Task 1: List all employees
+   along with their department names
+   ========================================= */
+SELECT e.name AS employee_name,
+       d.department_name
+FROM Employees e
+JOIN Departments d
+ON e.department_id = d.department_id;
+
+/* =========================================
+   Task 2: Find employees who earn
+   more than the average salary
+   ========================================= */
+SELECT name, salary
+FROM Employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM Employees
+);
+
+/* =========================================
+   Task 3: Show employee name and
+   salary level based on salary value
+   ========================================= */
+SELECT name,
+       CASE
+           WHEN salary > 70000 THEN 'High'
+           WHEN salary BETWEEN 50000 AND 70000 THEN 'Medium'
+           ELSE 'Low'
+       END AS salary_level
+FROM Employees;
+
+/* =========================================
+   Task 4: Assign a rank to employees
+   based on salary (highest salary = Rank 1)
+   ========================================= */
+SELECT name,
+       salary,
+       RANK() OVER (ORDER BY salary DESC) AS salary_rank
+FROM Employees;
