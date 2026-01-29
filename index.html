@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل الدخول</title>
+    <style>
+        /* إعدادات الخلفية والجسم */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* حاوية النموذج الأبيض */
+        .login-container {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: left;
+        }
+
+        /* الجزء العلوي (الأيقونة وكلمة LOGIN) */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header img {
+            width: 80px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .header h2 {
+            color: #34b3e4;
+            margin: 10px 0;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* حقول الإدخال */
+        label {
+            display: block;
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* لضمان عدم خروج الحقل عن الحاوية */
+            font-size: 16px;
+        }
+
+        /* منطقة التذكر ونسيان كلمة السر */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .options a {
+            color: #34b3e4;
+            text-decoration: none;
+        }
+
+        .options label {
+            display: inline;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* زر الدخول */
+        .login-btn {
+            width: 100%;
+            background-color: #34b3e4;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #2a92ba;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="header">
+            <svg width="60" height="60" viewBox="0 0 100 100" style="margin-bottom: 10px;">
+                <circle cx="50" cy="35" r="20" fill="#fbd3d3" />
+                <path d="M20 80 Q50 40 80 80" stroke="#a855f7" stroke-width="15" fill="none" stroke-linecap="round" />
+            </svg>
+            <h2>LOGIN</h2>
+        </div>
+
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+
+            <div class="options">
+                <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember Me</label>
+                </div>
+                <a href="#">Forget Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">login</button>
+        </form>
+    </div>
+
+</body>
+</html>

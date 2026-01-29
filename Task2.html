@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card - Rania Alzaeem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* إعدادات الخط والخلفية العامة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #dcdcdc; /* اللون الرمادي الفاتح للخلفية */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* تصميم البطاقة البيضاء */
+        .card {
+            background-color: #f8fdff;
+            width: 320px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* أيقونة المستخدم الزرقاء */
+        .profile-icon {
+            font-size: 80px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* اسم الشخص */
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin: 10px 0;
+        }
+
+        /* المسمى الوظيفي */
+        .title {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* الوصف الشخصي */
+        .description {
+            font-size: 14px;
+			font-weight: bold;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* منطقة أيقونات التواصل الاجتماعي */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            font-size: 22px;
+            color: #55acee; /* لون الأيقونات الأزرق السماوي */
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="profile-icon">
+            <i class="fas fa-user-circle"></i>
+        </div>
+
+        <div class="name">Rania Alzaeem</div>
+        <div class="title">Front End developer</div>
+        
+        <p class="description">
+            Passionate about clean code, great UI/UX, and web performance
+        </p>
+
+      <div class="social-icons">
+            <a href="https://www.linkedin.com/in/YOUR_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/YOUR_USERNAME" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/YOUR_USERNAME" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+
+</body>
+</html>

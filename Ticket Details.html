@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <style>
+        /* إعدادات الخلفية لتشبه الصورة */
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* الحاوية الرمادية */
+        .ticket-box {
+            background-color: #4a4a4a;
+            padding: 30px;
+            width: 400px;
+            border: 1px solid #333;
+            color: #b0b0b0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* عنوان التذكرة العلوي */
+        .ticket-header {
+            font-size: 26px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* تنسيق الصفوف (Label و Value) */
+        .row {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .label {
+            width: 120px;
+            font-style: italic;
+            font-weight: bold;
+            color: #ccc;
+        }
+
+        .value {
+            flex: 1;
+        }
+
+        /* الألوان المخصصة من الصورة */
+        .green-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #58ae58;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .highlight-text {
+            color: #e0a355; /* اللون البرتقالي المصفر */
+            font-weight: bold;
+        }
+
+        .error-text {
+            color: #cc3333; /* اللون الأحمر */
+            font-weight: bold;
+            display: block;
+            margin-left: 120px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+
+        .link-style {
+            color: #e0a355;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .status-text {
+            color: #e0a355;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ticket-box">
+        <div class="ticket-header">Ticket ID: 409788</div>
+
+        <div class="row">
+            <span class="label">Name:</span>
+            <span class="value">
+                <span class="green-dot"></span>
+                <span class="highlight-text">Parker Seidel</span>
+            </span>
+        </div>
+        <div class="error-text">No Active Support</div>
+
+        <div class="row">
+            <span class="label">Email:</span>
+            <span class="value highlight-text">seidel@aptmail.com</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Response Time:</span>
+            <span class="value">72hours, 60hours left</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Last Action:</span>
+            <span class="value">Never been locked.</span>
+        </div>
+
+        <div class="row" style="margin-top: 15px;">
+            <span class="label"></span>
+            <span class="value link-style">Link to public post</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Status:</span>
+            <span class="value status-text">Not answered</span>
+        </div>
+    </div>
+
+</body>
+</html>
