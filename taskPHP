@@ -1,0 +1,71 @@
+<?php
+echo "<h2>1- طباعة الأرقام من 1 إلى 10</h2>";
+for ($i = 1; $i <= 10; $i++) {
+    echo $i . "<br>";
+}
+
+echo "<hr>";
+
+echo "<h2>2- عرض التاريخ والوقت الحالي</h2>";
+echo date("Y-m-d H:i:s");
+
+echo "<hr>";
+
+echo "<h2>3- التحقق إذا كان الرقم زوجي أو فردي</h2>";
+$number = 7;
+if ($number % 2 == 0) {
+    echo "الرقم $number زوجي";
+} else {
+    echo "الرقم $number فردي";
+}
+
+echo "<hr>";
+
+echo "<h2>4- الاتصال بقاعدة بيانات MySQL</h2>";
+$conn = mysqli_connect("localhost", "root", "", "test_db");
+
+if (!$conn) {
+    echo "فشل الاتصال بقاعدة البيانات";
+} else {
+    echo "تم الاتصال بقاعدة البيانات بنجاح";
+}
+
+echo "<hr>";
+
+echo "<h2>5- إرسال بريد إلكتروني</h2>";
+$to = "test@example.com";
+$subject = "Test Email";
+$message = "Hello from PHP";
+$headers = "From: sender@example.com";
+
+if (mail($to, $subject, $message, $headers)) {
+    echo "تم إرسال البريد بنجاح";
+} else {
+    echo "فشل إرسال البريد (طبيعي على localhost)";
+}
+
+echo "<hr>";
+
+echo "<h2>6- نموذج تسجيل دخول بسيط</h2>";
+?>
+
+<form method="post">
+    <input type="text" name="username" placeholder="Username" required>
+    <br><br>
+    <input type="password" name="password" placeholder="Password" required>
+    <br><br>
+    <button type="submit">Login</button>
+</form>
+
+<?php
+if ($_POST) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($username == "admin" && $password == "1234") {
+        echo "<p style='color:green'>تسجيل دخول ناجح</p>";
+    } else {
+        echo "<p style='color:red'>اسم المستخدم أو كلمة المرور خاطئة</p>";
+    }
+}
+?>
