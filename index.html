@@ -1,138 +1,200 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة تسجيل الدخول</title>
-    <style>
-        /* إعدادات الخلفية والجسم */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medinova - Healthcare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#1ccad8;
+      --dark:#1f2f3e;
+      --gray:#6c757d;
+      --light:#f8f9fa;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;color:var(--dark);line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
 
-        /* حاوية النموذج الأبيض */
-        .login-container {
-            background-color: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 350px;
-            text-align: left;
-        }
+    /* NAV */
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:20px 80px;background:#fff;position:sticky;top:0;z-index:10}
+    .logo{font-size:24px;font-weight:700;color:var(--primary)}
+    .menu a{margin:0 15px;font-weight:500}
 
-        /* الجزء العلوي (الأيقونة وكلمة LOGIN) */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;padding:80px;background:linear-gradient(to right,#e9f9fb,#ffffff)}
+    .hero h1{font-size:48px;margin-bottom:20px}
+    .hero p{color:var(--gray);margin-bottom:30px}
+    .btn{padding:14px 28px;border-radius:30px;font-weight:500;display:inline-block}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-outline{border:2px solid var(--primary);color:var(--primary);margin-left:10px}
 
-        .header img {
-            width: 80px;
-            display: block;
-            margin: 0 auto;
-        }
+    /* SERVICES */
+    .section{padding:80px}
+    .section-title{text-align:center;margin-bottom:50px}
+    .section-title h2{font-size:36px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+    .service-box{background:#fff;padding:30px;border-radius:12px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+    .service-box img{width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:20px}
+    .service-box i{font-size:36px;color:var(--primary);margin-bottom:20px}
 
-        .header h2 {
-            color: #34b3e4;
-            margin: 10px 0;
-            font-size: 28px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    /* APPOINTMENT */
+    .appointment{display:grid;grid-template-columns:1fr 1fr;background:var(--primary);color:#fff;border-radius:20px;overflow:hidden}
+    .appointment .left{padding:60px}
+    .appointment .right{background:#fff;padding:40px;color:var(--dark)}
+    .appointment input,.appointment select{width:100%;padding:12px;margin-bottom:15px;border-radius:6px;border:1px solid #ddd}
 
-        /* حقول الإدخال */
-        label {
-            display: block;
-            color: #666;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+    /* PRICING */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+    .price-box{background:#fff;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:40px;text-align:center}
+    .price{font-size:40px;color:var(--primary)}
 
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box; /* لضمان عدم خروج الحقل عن الحاوية */
-            font-size: 16px;
-        }
+    /* DOCTORS */
+    .doctors{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+    .doctor{display:flex;gap:20px;align-items:center;background:#fff;padding:20px;border-radius:12px}
 
-        /* منطقة التذكر ونسيان كلمة السر */
-        .options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
+    /* TESTIMONIAL */
+    .testimonial{text-align:center;max-width:700px;margin:auto}
 
-        .options a {
-            color: #34b3e4;
-            text-decoration: none;
-        }
+    /* BLOG */
+    .blogs{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+    .blog{background:#fff;border-radius:12px;overflow:hidden}
+    .blog .content{padding:20px}
 
-        .options label {
-            display: inline;
-            margin: 0;
-            cursor: pointer;
-        }
+    /* FOOTER */
+    footer{background:var(--dark);color:#fff;padding:60px}
+    footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
 
-        /* زر الدخول */
-        .login-btn {
-            width: 100%;
-            background-color: #34b3e4;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #2a92ba;
-        }
-    </style>
+    @media(max-width:900px){
+      .hero,.services,.pricing,.blogs,.appointment,.doctors{grid-template-columns:1fr}
+      .nav{padding:20px}
+      .hero{padding:40px}
+      .section{padding:40px}
+    }
+  </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="header">
-            <svg width="60" height="60" viewBox="0 0 100 100" style="margin-bottom: 10px;">
-                <circle cx="50" cy="35" r="20" fill="#fbd3d3" />
-                <path d="M20 80 Q50 40 80 80" stroke="#a855f7" stroke-width="15" fill="none" stroke-linecap="round" />
-            </svg>
-            <h2>LOGIN</h2>
-        </div>
+  <header class="nav">
+    <div class="logo">MEDINOVA</div>
+    <nav class="menu">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Doctors</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-        <form>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-
-            <div class="options">
-                <div>
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Remember Me</label>
-                </div>
-                <a href="#">Forget Password?</a>
-            </div>
-
-            <button type="submit" class="login-btn">login</button>
-        </form>
+  <section class="hero">
+    <div>
+      <h1>Best Healthcare Solution In Your City</h1>
+      <p>Professional doctors, modern equipment and friendly care for your family.</p>
+      <a class="btn btn-primary" href="#">Find Doctor</a>
+      <a class="btn btn-outline" href="#">Appointment</a>
     </div>
+    <img src="https://images.unsplash.com/photo-1606813902919-d9e79c8c6c6c" alt="Doctor" />
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <span style="color:var(--primary);font-weight:600">SERVICES</span>
+      <h2>Excellent Medical Services</h2>
+    </div>
+    <div class="services">
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1580281657521-8c6b3f7f8f65" alt="Emergency">
+        <h4>Emergency Care</h4>
+        <p>24/7 emergency medical services with professional staff.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464" alt="Surgery">
+        <h4>Operation & Surgery</h4>
+        <p>Advanced operation theaters with expert surgeons.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" alt="Checkup">
+        <h4>Outdoor Checkup</h4>
+        <p>Regular checkups and diagnostics for all patients.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1589758438368-0ad531db3366" alt="Ambulance">
+        <h4>Ambulance Service</h4>
+        <p>Fast and reliable ambulance services anytime.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88" alt="Pharmacy">
+        <h4>Medicine & Pharmacy</h4>
+        <p>All prescribed medicines available in-house.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" alt="Lab">
+        <h4>Blood Testing</h4>
+        <p>Accurate and fast lab testing services.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="appointment">
+      <div class="left">
+        <h2>Make An Appointment</h2>
+        <p>Book an appointment with our specialists easily.</p>
+      </div>
+      <div class="right">
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <select id="doctor">
+  <option value="">اختاري الدكتور</option>
+  <option>Dr. Ahmad Ali – Cardiologist</option>
+  <option>Dr. Sara Hassan – Neurologist</option>
+  <option>Dr. Omar Khaled – Dentist</option>
+  <option>Dr. Lina Youssef – Pediatrics</option>
+</select>
+        <input type="date" />
+        <a class="btn btn-primary" href="#">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Awesome Medical Programs</h2></div>
+    <div class="pricing">
+      <div class="price-box"><h4>Dental Care</h4><div class="price">$149</div></div>
+      <div class="price-box"><h4>Operation & Surgery</h4><div class="price">$199</div></div>
+      <div class="price-box"><h4>Pregnancy Care</h4><div class="price">$49</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Qualified Professionals</h2></div>
+    <div class="doctors">
+      <div class="doctor"><img src="https://randomuser.me/api/portraits/men/32.jpg" width="80"><div><h4>Doctor Name</h4><p>Cardiologist</p></div></div>
+      <div class="doctor"><img src="https://randomuser.me/api/portraits/women/44.jpg" width="80"><div><h4>Doctor Name</h4><p>Neurologist</p></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Latest Medical Blogs</h2></div>
+    <div class="blogs">
+      <div class="blog"><img src="https://images.unsplash.com/photo-1580281657521-8c6b3f7f8f65"><div class="content"><h4>Medical Tips</h4></div></div>
+      <div class="blog"><img src="https://images.unsplash.com/photo-1580281658629-6c1f4d8b3b5a"><div class="content"><h4>Healthy Life</h4></div></div>
+      <div class="blog"><img src="https://images.unsplash.com/photo-1579154203451-0a44f6d9d2c7"><div class="content"><h4>Doctor Advice</h4></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="cols">
+      <div><h3>Medinova</h3><p>Best medical care for you and your family.</p></div>
+      <div><h4>Services</h4><p>Emergency</p><p>Doctors</p></div>
+      <div><h4>Quick Links</h4><p>About</p><p>Contact</p></div>
+      <div><h4>Newsletter</h4><input type="email" placeholder="Email"></div>
+    </div>
+  </footer>
+<script src="script.js"></script>
 
 </body>
 </html>
