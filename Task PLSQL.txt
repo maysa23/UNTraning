@@ -1,0 +1,138 @@
+-------------------------------------------------------
+-- 1. Procedure لحساب راتب موظف بعد إضافة علاوة
+-------------------------------------------------------
+CREATE OR REPLACE PROCEDURE Calculate_Salary_After_Bonus(
+    p_employee_id IN NUMBER,
+    p_bonus_percentage IN NUMBER,
+    p_new_salary OUT NUMBER
+) AS
+    v_salary NUMBER;
+BEGIN
+    SELECT salary INTO v_salary
+    FROM Employees
+    WHERE employee_id = p_employee_id;
+
+    -- حساب الراتب الجديد مع معالجة النسبة إذا كانت فارغة
+    p_new_salary := v_salary + (v_salary * NVL(p_bonus_percentage, 0) / 100);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('خطأ: الموظف غير موجود');
+        p_new_salary := 0;
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('حدث خطأ غير متوقع في حساب الراتب');
+END Calculate_Salary_After_Bonus;
+/
+
+-------------------------------------------------------
+-- 2. Function لحساب العمر من تاريخ الميلاد
+-------------------------------------------------------
+CREATE OR REPLACE FUNCTION Calculate_Age(
+    p_birth_date IN DATE
+) RETURN NUMBER IS
+BEGIN
+    -- استخدام FLOOR و MONTHS_BETWEEN للدقة
+    RETURN FLOOR(MONTHS_BETWEEN(SYSDATE, p_birth_date) / 12);
+END Calculate_Age;
+/
+
+-------------------------------------------------------
+-- 3. Function تُعيد إجمالي رواتب موظفي قسم معين
+-------------------------------------------------------
+CREATE OR REPLACE FUNCTION Total_Salary_By_Department(
+    p_department_id IN NUMBER
+) RETURN NUMBER IS
+    v_total_salary NUMBER;
+BEGIN
+    SELECT SUM(salary) INTO v_total_salary
+    FROM Employees
+    WHERE department_id = p_department_id;
+    
+    RETURN NVL(v_total_salary, 0); -- إرجاع 0 إذا لم يوجد موظفين
+END Total_Salary_By_Department;
+/
+
+-------------------------------------------------------
+-- 4. Package (Specification) مواصفات الحزمة
+-------------------------------------------------------
+CREATE OR REPLACE PACKAGE Employee_Manager AS
+    -- إضافة موظف
+    PROCEDURE Add_Employee(p_name IN VARCHAR2, p_dept_id IN NUMBER, p_sal IN NUMBER);
+    
+    -- حذف موظف
+    PROCEDURE Delete_Employee(p_employee_id IN NUMBER);
+    
+    -- تعديل موظف
+    PROCEDURE Update_Employee(p_id IN NUMBER, p_name IN VARCHAR2, p_dept_id IN NUMBER, p_sal IN NUMBER);
+    
+    -- جلب معلومات موظف
+    FUNCTION Get_Employee_Info(p_employee_id IN NUMBER) RETURN VARCHAR2;
+    
+    -- إجمالي الرواتب
+    FUNCTION Get_Total_Salaries RETURN NUMBER;
+    
+    -- عرض كافة الموظفين
+    FUNCTION Get_All_Employees RETURN SYS_REFCURSOR;
+END Employee_Manager;
+/
+
+-------------------------------------------------------
+-- 5. Package Body (Implementation) جسم الحزمة
+-------------------------------------------------------
+CREATE OR REPLACE PACKAGE BODY Employee_Manager AS
+
+    PROCEDURE Add_Employee(p_name IN VARCHAR2, p_dept_id IN NUMBER, p_sal IN NUMBER) IS
+    BEGIN
+        INSERT INTO Employees (name, department_id, salary)
+        VALUES (p_name, p_dept_id, p_sal);
+        COMMIT;
+        DBMS_OUTPUT.PUT_LINE('تم إضافة الموظف بنجاح');
+    END Add_Employee;
+
+    PROCEDURE Delete_Employee(p_employee_id IN NUMBER) IS
+    BEGIN
+        DELETE FROM Employees WHERE employee_id = p_employee_id;
+        IF SQL%NOTFOUND THEN
+            DBMS_OUTPUT.PUT_LINE('تنبيه: الموظف غير موجود مسبقاً');
+        ELSE
+            COMMIT;
+            DBMS_OUTPUT.PUT_LINE('تم حذف الموظف');
+        END IF;
+    END Delete_Employee;
+
+    PROCEDURE Update_Employee(p_id IN NUMBER, p_name IN VARCHAR2, p_dept_id IN NUMBER, p_sal IN NUMBER) IS
+    BEGIN
+        UPDATE Employees 
+        SET name = p_name, department_id = p_dept_id, salary = p_sal 
+        WHERE employee_id = p_id;
+        COMMIT;
+    END Update_Employee;
+
+    FUNCTION Get_Employee_Info(p_employee_id IN NUMBER) RETURN VARCHAR2 IS
+        v_info VARCHAR2(500);
+    BEGIN
+        SELECT 'ID: ' || employee_id || ' | الاسم: ' || name || ' | القسم: ' || department_id || ' | الراتب: ' || salary
+        INTO v_info
+        FROM Employees
+        WHERE employee_id = p_employee_id;
+        RETURN v_info;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN RETURN 'عذراً، الموظف غير موجود في السجلات';
+    END Get_Employee_Info;
+
+    FUNCTION Get_Total_Salaries RETURN NUMBER IS
+        v_total NUMBER;
+    BEGIN
+        SELECT SUM(salary) INTO v_total FROM Employees;
+        RETURN NVL(v_total, 0);
+    END Get_Total_Salaries;
+
+    FUNCTION Get_All_Employees RETURN SYS_REFCURSOR IS
+        v_cursor SYS_REFCURSOR;
+    BEGIN
+        OPEN v_cursor FOR SELECT * FROM Employees;
+        RETURN v_cursor;
+    END Get_All_Employees;
+
+END Employee_Manager;
+/
